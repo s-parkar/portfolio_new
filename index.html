@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spandan's Portfolio - Retro Terminal Experience">
+  <title>SPANDAN.SYS | Portfolio Terminal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <!-- 3D Scene Container -->
+  <div id="scene-container"></div>
+
+  <!-- Terminal Wrapper - sized for CSS3D mapping -->
+  <div id="terminal-wrapper">
+    <div class="scanlines"></div>
+    <div class="screen-glare"></div>
+
+    <!-- BIOS/Loading Screen -->
+    <div id="bios-screen" style="display: none;">
+      <div class="bios-text">
+        <div class="bios-logo">
+          ________ ________ ________ ________ ________
+          / _____/ / _____/ / _____/ / _____/ / _____/
+          / \ ___/ \ ___/ \ ___/ \ ___/ \ ___
+          \ \_\ \ \_\ \ \_\ \ \_\ \ \_\ \
+          \______ /\______ /\______ /\______ /\______ /
+          \/ \/ \/ \/ \/
+          SPANDAN WORKSTATION BIOS v2.4
+        </div>
+        <br>
+        <div id="system-specs">
+          CPU: QUANTUM-CORE i86 @ 4.77GHz<br>
+          MEM: <span id="memory-count">0</span> KB WAIT STATE<br>
+          GFX: NEURAL-DISPLAY ADAPTER
+        </div>
+        <br>
+        <div id="bios-check-list"></div>
+        <div id="bios-status"></div>
+      </div>
+    </div>
+
+    <!-- Terminal (Initially hidden) -->
+    <div id="terminal" style="display: none;">
+      <div id="terminal-output"></div>
+      <div id="input-line">
+        <span class="prompt">guest@spandan:~$</span>
+        <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+        <span class="cursor">▋</span>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/terminal/Monitor3D.js"></script>
+</body>
+
+</html>

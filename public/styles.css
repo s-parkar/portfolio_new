@@ -1,0 +1,263 @@
+/* 3D Monitor Portfolio - CSS3D Integrated Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --amber: #ff8c00;
+  --amber-dim: #b86200;
+  --amber-glow: rgba(255, 140, 0, 0.5);
+  --screen-bg: #1a2618;
+  /* Matched to 3D model color */
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  background: #2a2015;
+}
+
+/* 3D Scene Container */
+#scene-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Terminal Wrapper - sized for CSS3D mapping (2.6 / 1.9 aspect ratio) */
+#terminal-wrapper {
+  width: 800px;
+  height: 584px;
+  background: var(--screen-bg);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Scanlines */
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+  background: repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0.06),
+      rgba(0, 0, 0, 0.06) 1px,
+      transparent 1px,
+      transparent 3px);
+  border-radius: 12px;
+}
+
+/* Screen glare */
+.screen-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 30%),
+    radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+  z-index: 100;
+  border-radius: 12px;
+}
+
+/* Terminal */
+#terminal {
+  width: 100%;
+  height: 100%;
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  color: var(--amber);
+  font-size: 16px;
+  line-height: 1.5;
+  text-shadow: 0 0 8px var(--amber-glow), 0 0 12px var(--amber-glow);
+  position: relative;
+  z-index: 50;
+}
+
+#terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  /* Space for scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--amber-dim) transparent;
+}
+
+#terminal-output::-webkit-scrollbar {
+  width: 8px;
+  display: block;
+  /* Force display */
+}
+
+#terminal-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#terminal-output::-webkit-scrollbar-thumb {
+  background: var(--amber-dim);
+  border-radius: 4px;
+}
+
+.output-line {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-bottom: 3px;
+}
+
+.output-line.command {
+  color: var(--amber);
+}
+
+.output-line.error {
+  color: #ff4444;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+}
+
+.output-line.info {
+  color: var(--amber-dim);
+}
+
+.output-line.highlight {
+  color: #ffcc00;
+  text-shadow: 0 0 8px rgba(255, 200, 0, 0.5);
+}
+
+.ascii-art {
+  font-size: 11px;
+  line-height: 1.1;
+  margin: 8px 0;
+}
+
+#input-line {
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--amber-dim);
+}
+
+.prompt {
+  color: var(--amber);
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+#terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--amber);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  caret-color: transparent;
+  text-shadow: 0 0 8px var(--amber-glow);
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
+  color: var(--amber);
+}
+
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Themes */
+.theme-green {
+  --amber: #33ff33;
+  --amber-dim: #1a8a1a;
+  --amber-glow: rgba(51, 255, 51, 0.5);
+}
+
+.theme-white {
+  --amber: #e8e8e8;
+  --amber-dim: #888888;
+  --amber-glow: rgba(255, 255, 255, 0.3);
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--screen-bg);
+}
+
+/* BIOS Screen Styles */
+#bios-screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #ccc;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 1.2;
+}
+
+.bios-logo {
+  color: #00ffff;
+  font-weight: bold;
+  white-space: pre;
+  margin-bottom: 20px;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+#system-specs {
+  color: #fff;
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+#bios-check-list {
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.check-item {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.check-status {
+  color: #00ff00;
+}
+
+#memory-count {
+  font-weight: bold;
+  color: #fff;
+}
