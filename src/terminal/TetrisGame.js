@@ -69,7 +69,9 @@ export class TetrisGame {
         this.gameContainer.className = 'game-container';
         this.gameContainer.style.fontFamily = 'monospace';
         this.gameContainer.style.whiteSpace = 'pre';
-        this.gameContainer.style.lineHeight = '1.2';
+        this.gameContainer.style.fontSize = '20px'; // Increased size
+        this.gameContainer.style.lineHeight = '1.0'; // Tighter alignment for blocks
+        this.gameContainer.style.letterSpacing = '0px';
         this.gameContainer.style.color = '#00ffff'; // Cyan for sci-fi feel
         this.output.appendChild(this.gameContainer);
 
@@ -130,7 +132,13 @@ export class TetrisGame {
                     const boardX = this.currentPiece.x + x + offsetX;
                     const boardY = this.currentPiece.y + y + offsetY;
 
-                    if (boardY >= this.height || this.board[boardY] && this.board[boardY][boardX] !== 0) {
+                    // Explicit boundary checks
+                    if (boardX < 0 || boardX >= this.width || boardY >= this.height) {
+                        return true;
+                    }
+
+                    // Check occupancy (if inside bounds)
+                    if (this.board[boardY] && this.board[boardY][boardX] !== 0) {
                         return true;
                     }
                 }
@@ -198,13 +206,13 @@ export class TetrisGame {
                     if (py >= 0 && py < this.currentPiece.shape.length &&
                         px >= 0 && px < this.currentPiece.shape[0].length &&
                         this.currentPiece.shape[py][px]) {
-                        cell = 2;
+                        cell = 2; // Active block
                     }
                 }
 
-                if (cell === 1) display += '│'; // Wall
-                else if (cell === 2) display += '█'; // Block
-                else display += ' '; // Empty
+                if (cell === 1) display += '<>'; // Wall (Double width)
+                else if (cell === 2) display += '[]'; // Block (Double width)
+                else display += ' .'; // Empty (Space + Dot for grid)
             }
             display += '\n';
         }
