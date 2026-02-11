@@ -27,18 +27,37 @@ class Monitor3D {
     }
 
     init() {
-        this.setupScene();
-        this.createMonitor();
-        this.setupLights();
-        this.attachTerminalToScreen();
-        this.setupEventListeners();
-        this.animate();
+        // Check for mobile first
+        if (window.innerWidth < 768) {
+            document.body.classList.add('mobile-mode');
+            this.runBiosSequence();
+        } else {
+            this.setupScene();
+            this.createMonitor();
+            this.setupLights();
+            this.attachTerminalToScreen();
+            this.setupEventListeners();
+            this.animate();
 
-        // Start BIOS sequence on boot
-        setTimeout(() => this.runBiosSequence(), 100);
+            // Start BIOS sequence on boot
+            setTimeout(() => this.runBiosSequence(), 100);
+        }
+
+        // Global resize listener for mode switching
+        window.addEventListener('resize', () => {
+            const isMobile = window.innerWidth < 768;
+            const wasMobile = document.body.classList.contains('mobile-mode');
+
+            if (isMobile !== wasMobile) {
+                // Reload to switch modes cleanly
+                window.location.reload();
+            }
+        });
     }
 
     setupScene() {
+        if (document.body.classList.contains('mobile-mode')) return;
+
         const container = document.getElementById('scene-container');
 
         // Scene

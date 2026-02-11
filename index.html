@@ -25,7 +25,7 @@
     <!-- BIOS/Loading Screen -->
     <div id="bios-screen" style="display: none;">
       <div class="bios-text">
-        <div class="bios-logo">
+        <div class="bios-logo desktop-only">
           ________ ________ ________ ________ ________
           / _____/ / _____/ / _____/ / _____/ / _____/
           / \ ___/ \ ___/ \ ___/ \ ___/ \ ___
@@ -33,6 +33,10 @@
           \______ /\______ /\______ /\______ /\______ /
           \/ \/ \/ \/ \/
           SPANDAN WORKSTATION BIOS v2.4
+        </div>
+        <div class="bios-logo mobile-only" style="display:none">
+          SPANDAN BIOS v2.4
+          -----------------
         </div>
         <br>
         <div id="system-specs">
@@ -51,9 +55,24 @@
       <div id="terminal-output"></div>
       <div id="input-line">
         <span class="prompt">guest@spandan:~$</span>
-        <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
+        <span id="typed-content"></span>
         <span class="cursor">▋</span>
+        <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false">
       </div>
+    </div>
+  </div>
+
+  <!-- Mobile Game Controls (Hidden by default) -->
+  <div id="mobile-controls">
+    <div class="d-pad">
+      <div class="control-btn d-btn-up" data-key="ArrowUp">▲</div>
+      <div class="control-btn d-btn-left" data-key="ArrowLeft">◀</div>
+      <div class="control-btn d-btn-right" data-key="ArrowRight">▶</div>
+      <div class="control-btn d-btn-down" data-key="ArrowDown">▼</div>
+    </div>
+    <div class="action-pad">
+      <div class="control-btn btn-b" data-key="Escape">ESC</div>
+      <div class="control-btn btn-a" data-key=" ">ACT</div>
     </div>
   </div>
 

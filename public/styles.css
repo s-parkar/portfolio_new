@@ -160,15 +160,25 @@ body {
 }
 
 #terminal-input {
-  flex: 1;
-  background: transparent;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
   border: none;
-  outline: none;
+  pointer-events: none;
+  /* Let clicks go to wrapper if needed, but handled by JS focus */
+}
+
+#typed-content {
   color: var(--amber);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 16px;
-  caret-color: transparent;
+  white-space: pre-wrap;
+  word-wrap: break-word;
   text-shadow: 0 0 8px var(--amber-glow);
+  min-height: 24px;
+  /* Maintain height even if empty */
 }
 
 .cursor {
@@ -260,4 +270,61 @@ body {
 #memory-count {
   font-weight: bold;
   color: #fff;
+}
+
+/* --- Mobile Mode (2D Fullscreen) --- */
+body.mobile-mode {
+  background: var(--screen-bg);
+  overflow: hidden;
+}
+
+body.mobile-mode #scene-container {
+  display: none !important;
+}
+
+body.mobile-mode #terminal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  transform: none !important;
+  /* Override CSS3D transforms */
+  z-index: 1000;
+}
+
+body.mobile-mode #terminal {
+  height: 100%;
+  font-size: 14px;
+  /* Slightly smaller for mobile */
+  padding: 15px;
+}
+
+body.mobile-mode #terminal-output {
+  padding-right: 5px;
+}
+
+body.mobile-mode .scanlines {
+  opacity: 0.5;
+  /* Less intense on mobile */
+}
+
+body.mobile-mode .screen-glare {
+  background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+/* Adjust BIOS screen for mobile */
+body.mobile-mode #bios-screen {
+  padding: 20px;
+  font-size: 12px;
+}
+
+body.mobile-mode .bios-logo {
+  font-size: 10px;
+  white-space: pre-wrap;
+  /* Allow wrapping if needed, though ASCII art might break */
+  overflow: hidden;
 }
