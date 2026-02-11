@@ -95,20 +95,24 @@ export class TerminalPortfolio {
                 this.executeCommand(command);
             }
             this.input.value = '';
+            this.syncInputDisplay();
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
             if (this.historyIndex > 0) {
                 this.historyIndex--;
                 this.input.value = this.commandHistory[this.historyIndex];
+                this.syncInputDisplay();
             }
         } else if (e.key === 'ArrowDown') {
             e.preventDefault();
             if (this.historyIndex < this.commandHistory.length - 1) {
                 this.historyIndex++;
                 this.input.value = this.commandHistory[this.historyIndex];
+                this.syncInputDisplay();
             } else {
                 this.historyIndex = this.commandHistory.length;
                 this.input.value = '';
+                this.syncInputDisplay();
             }
         }
     }
@@ -198,6 +202,8 @@ export class TerminalPortfolio {
     launchGame(GameClass) {
         this.gameMode = true;
         document.body.classList.add('game-active');
+        this.input.value = '';
+        this.syncInputDisplay();
 
         // Only blur input on mobile to prevent virtual keyboard
         if (this.isMobile) {
@@ -216,6 +222,7 @@ export class TerminalPortfolio {
             document.body.classList.remove('game-active');
             this.currentGame = null;
             this.input.value = '';
+            this.syncInputDisplay();
             this.input.focus();
             this.addOutput('Game terminated.', 'info');
             this.scrollToBottom();
@@ -226,14 +233,14 @@ export class TerminalPortfolio {
     }
 
     async bootSequence() {
-        await this.typeOutput('Initializing SPANDAN.SYS...', 'info', 50);
-        await this.delay(300);
-        await this.typeOutput('Loading personality modules...', 'info', 30);
-        await this.delay(200);
-        await this.typeOutput('Mounting portfolio data...', 'info', 30);
-        await this.delay(200);
-        await this.typeOutput('System ready.\n', 'info', 30);
-        await this.delay(300);
+        await this.typeOutput('Initializing SPANDAN.SYS...', 'info', 10);
+        await this.delay(100);
+        await this.typeOutput('Loading personality modules...', 'info', 10);
+        await this.delay(50);
+        await this.typeOutput('Mounting portfolio data...', 'info', 10);
+        await this.delay(50);
+        await this.typeOutput('System ready.\n', 'info', 10);
+        await this.delay(100);
 
         // ASCII Banner
         this.printBanner();

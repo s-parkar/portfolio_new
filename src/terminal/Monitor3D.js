@@ -162,13 +162,13 @@ class Monitor3D {
         const neckGeometry = new THREE.BoxGeometry(0.45, 0.35, 0.55);
         const neck = new THREE.Mesh(neckGeometry, beigeMaterial);
         neck.position.set(0, -1.35, 0);
-        neck.castShadow = true;
+        // neck.castShadow = true; // Disabled for performance
 
         // Stand base
         const baseGeometry = new THREE.CylinderGeometry(0.7, 0.9, 0.12, 32);
         const base = new THREE.Mesh(baseGeometry, beigeMaterial);
         base.position.set(0, -1.58, 0);
-        base.castShadow = true;
+        // base.castShadow = true; // Disabled for performance
         base.receiveShadow = true;
 
         // Add all parts to monitor group
@@ -216,9 +216,9 @@ class Monitor3D {
         const keyLight = new THREE.DirectionalLight(0xfff0d0, 0.9);
         keyLight.position.set(3, 3, 4);
         keyLight.castShadow = true;
-        keyLight.shadow.mapSize.width = 1024;
-        keyLight.shadow.mapSize.height = 1024;
-        keyLight.shadow.radius = 4;
+        keyLight.shadow.mapSize.width = 512; // Optimized from 1024
+        keyLight.shadow.mapSize.height = 512; // Optimized from 1024
+        keyLight.shadow.radius = 2; // Reduced softness for performance
         this.scene.add(keyLight);
 
         // Fill light
