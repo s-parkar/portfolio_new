@@ -308,7 +308,7 @@ export class TerminalPortfolio {
 ║  contact     │  How to reach me                              ║
 ║  game        │  Play Terminal Games (Snake/Defender/Tetris)  ║
 ║  clear       │  Clear the terminal screen                    ║
-║  theme       │  Change color (green/amber/white)             ║
+║  theme       │  Change color (green/amber/white/cyan)        ║
 ║  help        │  Show this help message                       ║
 ╚══════════════════════════════════════════════════════════════╝
 `;
@@ -611,7 +611,7 @@ export class TerminalPortfolio {
 
     cmdTheme(theme) {
         const wrapper = document.getElementById('terminal-wrapper');
-        wrapper.classList.remove('theme-green', 'theme-white');
+        wrapper.classList.remove('theme-green', 'theme-white', 'theme-cyan');
 
         if (theme === 'amber') {
             // Default amber, remove other classes
@@ -622,8 +622,11 @@ export class TerminalPortfolio {
         } else if (theme === 'green') {
             wrapper.classList.add('theme-green');
             this.addOutput('Theme changed to green.', 'info');
+        } else if (theme === 'cyan') {
+            wrapper.classList.add('theme-cyan');
+            this.addOutput('Theme changed to cyan.', 'info');
         } else {
-            this.addOutput('Usage: theme [amber|green|white]', 'info');
+            this.addOutput('Usage: theme [amber|green|white|cyan]', 'info');
         }
     }
 

@@ -212,6 +212,12 @@ body {
   --amber-glow: rgba(255, 255, 255, 0.3);
 }
 
+.theme-cyan {
+  --amber: #00ffff;
+  --amber-dim: #008b8b;
+  --amber-glow: rgba(0, 255, 255, 0.5);
+}
+
 ::selection {
   background: var(--amber);
   color: var(--screen-bg);
